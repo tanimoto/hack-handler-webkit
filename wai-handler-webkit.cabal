@@ -1,5 +1,5 @@
 name:            wai-handler-webkit
-version:         0.2.0
+version:         0.2.0.1
 license:         BSD3
 license-file:    LICENSE
 author:          Michael Snoyman <michael@snoyman.com>
@@ -21,4 +21,11 @@ library
     ghc-options:       -Wall -threaded
     exposed-modules:   Network.Wai.Handler.Webkit
     c-sources:         webkit.cpp
-    pkgconfig-depends: QtWebKit
+    if os(windows)
+        include-dirs:    c:\qt\2010.05\qt\include\qtgui
+                         c:\qt\2010.05\qt\include\qtwebkit
+                         c:\qt\2010.05\qt\include
+        extra-libraries: QtWebKit4 QtGui4 QtNetwork4 QtCore4 stdc++
+        extra-lib-dirs:  c:\qt\2010.05\qt\lib
+    else
+        pkgconfig-depends: QtWebKit
